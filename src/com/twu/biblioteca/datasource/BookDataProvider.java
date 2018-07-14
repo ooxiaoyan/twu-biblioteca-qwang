@@ -42,6 +42,7 @@ public class BookDataProvider {
             System.out.printf("%-40s", book.getAuthor());
             System.out.printf("%-5s\n", book.getYearOfPublication());
         }
+        System.out.print("-----------------------------------------\n");
     }
 
     public Book getBook(String id) {
