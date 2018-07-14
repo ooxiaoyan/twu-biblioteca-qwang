@@ -12,7 +12,7 @@ public class Book {
     private String name;
     private String author;
     private String yearOfPublication;
-    private String status;
+    private String status; // 1 - customer can checkout the book; 0 - customer can not checkout the book
 
     public Book() {}
 
@@ -21,6 +21,7 @@ public class Book {
         this.name = name;
         this.author = author;
         this.yearOfPublication = yearOfPublication;
+        this.status = "1";
     }
 
     public String getId() {
