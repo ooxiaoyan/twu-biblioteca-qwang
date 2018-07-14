@@ -43,4 +43,10 @@ public class BookControllerTest {
                         "------------------------------------------\n" +
                         "Please enter your choice: "));
     }
+
+    @Test
+    public void should_be_notified_when_customer_choose_an_invalid_option() {
+        bookController.invalidOptionMessage();
+        assertThat(systemOut(), containsString("Select a valid option! Please enter again your choice: "));
+    }
 }

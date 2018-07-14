@@ -20,4 +20,8 @@ public class BookController {
         welcomeMessage();
         mainMenu();
     }
+
+    public static void invalidOptionMessage() {
+        System.out.print("Select a valid option! Please enter again your choice: ");
+    }
 }
