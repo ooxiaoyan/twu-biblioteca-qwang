@@ -1,12 +1,12 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.controller.BookController;
+import com.twu.biblioteca.controller.MainController;
 
 public class BibliotecaApp {
 
     public static void main(String[] args) {
 
-        BookController bookController = new BookController();
-        bookController.init();
+        MainController mainController = new MainController();
+        mainController.init();
     }
 }

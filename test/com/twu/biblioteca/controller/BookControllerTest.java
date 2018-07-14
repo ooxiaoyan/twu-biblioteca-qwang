@@ -21,11 +21,13 @@ import static org.junit.Assert.assertThat;
 public class BookControllerTest {
 
     private BookController bookController;
+    private MainController mainController;
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
     public void setup() {
         bookController = new BookController();
+        mainController = new MainController();
         System.setOut(new PrintStream(outContent));
     }
 
@@ -35,19 +37,19 @@ public class BookControllerTest {
 
     @Test
     public void should_print_welcome_message_when_customer_start_the_application() {
-        bookController.welcomeMessage();
+        mainController.welcomeMessage();
         assertThat(systemOut(), containsString("----------Welcome to Biblioteca!----------\n\n"));
     }
 
     @Test
     public void print_main_menu_should_have_the_list_books() {
-        bookController.mainMenu();
+        mainController.mainMenu();
         assertThat(systemOut(), containsString("1. List Books"));
     }
 
     @Test
     public void should_be_notified_when_customer_choose_an_invalid_option() {
-        bookController.invalidOptionMessage();
+        mainController.invalidOptionMessage();
         assertThat(systemOut(), containsString("Select a valid option! Please enter again your choice: "));
     }
 

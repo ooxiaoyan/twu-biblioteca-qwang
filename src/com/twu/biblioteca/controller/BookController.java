@@ -3,7 +3,6 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.datasource.BookDataProvider;
 import com.twu.biblioteca.entity.Book;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,64 +11,6 @@ import java.util.Scanner;
 public class BookController {
 
     BookDataProvider bookDataProvider = new BookDataProvider();
-
-    public void welcomeMessage() {
-        System.out.print("----------Welcome to Biblioteca!----------\n\n");
-    }
-
-    public void mainMenu() {
-        System.out.print("\n" +
-                "1. List Books\n" +
-                "2. Checkout Book\n" +
-                "3. Return Book\n" +
-                "0. Quit\n" +
-                "------------------------------------------\n" +
-                "Please enter your choice: ");
-    }
-
-    public void init() {
-        welcomeMessage();
-        mainMenuPanel();
-    }
-
-    public void mainMenuPanel() {
-        mainMenu();
-        mainMenuOption();
-    }
-
-    public void invalidOptionMessage() {
-        System.out.print("Select a valid option! Please enter again your choice: ");
-    }
-
-    public void quit() {
-        System.exit(0);
-    }
-
-    public void mainMenuOption() {
-        Scanner input = new Scanner(System.in);
-        int num;
-        try {
-            num = input.nextInt();
-        } catch (InputMismatchException e) {
-            num = -1;
-        }
-
-        if (num == 1) {
-            bookDataProvider.printBookList();
-            mainMenuPanel();
-        } else if (num == 2) {
-            checkoutBookMenu();
-            mainMenuPanel();
-        } else if (num == 3) {
-            returnBookMenu();
-            mainMenuPanel();
-        } else if (num == 0) {
-            quit();
-        } else {
-            invalidOptionMessage();
-            mainMenuOption();
-        }
-    }
 
     public void checkoutBookMenu() {
         System.out.print("\nPlease enter the book id which you want to checkout: ");
