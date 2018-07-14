@@ -11,11 +11,11 @@ import java.util.List;
 public class BookDataProvider {
 
     private List<Book> books = Arrays.asList(
-            new Book("1", "Head First Java", "Kathy Sierra,BertBates", "2005"),
-            new Book("2", "Pride and Prejudice", "Jane Austen", "1983"),
-            new Book("3", "The Little Prince", "Antoine de Saint-Exupery", "1998"),
-            new Book("4", "Harry Potter and the Prisoner of Azkaban", "J. K. Rowling", "2001"),
-            new Book("5", "Les Miserables", "Victor Hugo", "1862")
+            new Book("twu001", "Head First Java", "Kathy Sierra,BertBates", "2005"),
+            new Book("twu002", "Pride and Prejudice", "Jane Austen", "1983"),
+            new Book("twu003", "The Little Prince", "Antoine de Saint-Exupery", "1998"),
+            new Book("twu004", "Harry Potter and the Prisoner of Azkaban", "J. K. Rowling", "2001"),
+            new Book("twu005", "Les Miserables", "Victor Hugo", "1862")
     );
 
     public List<Book> getBooks() {
