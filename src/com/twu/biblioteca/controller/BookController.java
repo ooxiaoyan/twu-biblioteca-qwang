@@ -3,6 +3,7 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.datasource.BookDataProvider;
 import com.twu.biblioteca.entity.Book;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -17,21 +18,23 @@ public class BookController {
     }
 
     public void mainMenu() {
-        System.out.print(
+        System.out.print("\n" +
                 "1. List Books\n" +
                 "2. Checkout Book\n" +
+                "3. Return Book\n" +
                 "0. Quit\n" +
                 "------------------------------------------\n" +
                 "Please enter your choice: ");
-
-        Scanner input = new Scanner(System.in);
-        int num = input.nextInt();
-        mainMenuOption(num);
     }
 
     public void init() {
         welcomeMessage();
+        mainMenuPanel();
+    }
+
+    public void mainMenuPanel() {
         mainMenu();
+        mainMenuOption();
     }
 
     public void invalidOptionMessage() {
@@ -42,18 +45,29 @@ public class BookController {
         System.exit(0);
     }
 
-    public void mainMenuOption(int n) {
-        if (n == 1) {
+    public void mainMenuOption() {
+        Scanner input = new Scanner(System.in);
+        int num;
+        try {
+            num = input.nextInt();
+        } catch (InputMismatchException e) {
+            num = -1;
+        }
+
+        if (num == 1) {
             bookDataProvider.printBookList();
-        } else if (n == 2) {
+            mainMenuPanel();
+        } else if (num == 2) {
             checkoutBookMenu();
-        } else if (n == 0) {
+            mainMenuPanel();
+        } else if (num == 3) {
+            returnBookMenu();
+            mainMenuPanel();
+        } else if (num == 0) {
             quit();
         } else {
             invalidOptionMessage();
-            Scanner input = new Scanner(System.in);
-            int num = input.nextInt();
-            mainMenuOption(num);
+            mainMenuOption();
         }
     }
 
@@ -62,13 +76,11 @@ public class BookController {
         Scanner input = new Scanner(System.in);
         String bookId = input.next();
         checkoutBook(bookId);
-
-        mainMenu();
     }
 
     public void checkoutBook(String bookId) {
         Book book = bookDataProvider.getBook(bookId);
-        if (book != null) {
+        if (book != null && book.getStatus().equals("1")) {
             int index = bookDataProvider.getBooks().indexOf(book);
             bookDataProvider.getBooks().get(index).setStatus("0");
             successfulCheckout();
@@ -78,10 +90,36 @@ public class BookController {
     }
 
     public void successfulCheckout() {
-        System.out.println("Thank you! Enjoy the book.");
+        System.out.println("\nThank you! Enjoy the book.");
     }
 
     public void unsuccessfulCheckout() {
-        System.out.println("That book is not available.");
+        System.out.println("\nThat book is not available.");
+    }
+
+    public void returnBookMenu() {
+        System.out.print("\nPlease enter the book id which you want to return: ");
+        Scanner input = new Scanner(System.in);
+        String bookId = input.next();
+        returnBook(bookId);
+    }
+
+    public void returnBook(String bookId) {
+        Book book = bookDataProvider.getBook(bookId);
+        if (book != null && book.getStatus().equals("0")) {
+            int index = bookDataProvider.getBooks().indexOf(book);
+            bookDataProvider.getBooks().get(index).setStatus("1");
+            successfulReturn();
+        } else {
+            unsuccessfulReturn();
+        }
+    }
+
+    public void successfulReturn() {
+        System.out.println("\nThank you for returning the book.");
+    }
+
+    public void unsuccessfulReturn() {
+        System.out.println("\nThat is not a valid book to return.");
     }
 }
