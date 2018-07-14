@@ -35,13 +35,11 @@ public class BookControllerTest {
     }
 
     @Test
-    public void should_print_main_menu_after_welcome_message() {
-        bookController.init();
+    public void should_print_main_menu() {
+        bookController.mainMenu();
         assertThat(systemOut(), containsString(
-                "----------Welcome to Biblioteca!----------\n\n" +
-                        "1. List Books\n" +
-                        "------------------------------------------\n" +
-                        "Please enter your choice: "));
+                "1. List Books\n" +
+                        "2. Quit\n"));
     }
 
     @Test
@@ -49,4 +47,5 @@ public class BookControllerTest {
         bookController.invalidOptionMessage();
         assertThat(systemOut(), containsString("Select a valid option! Please enter again your choice: "));
     }
+
 }
