@@ -1,5 +1,8 @@
 package com.twu.biblioteca.entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by 筱湮 on 2018/7/15 0015.
  */
@@ -50,5 +53,43 @@ public class Movie {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", this.id);
+        map.put("name", this.name);
+        map.put("year", this.year);
+        map.put("director", this.director);
+        map.put("rating", this.rating);
+        map.put("status", this.status);
+        return map.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        if (rating != movie.rating) return false;
+        if (id != null ? !id.equals(movie.id) : movie.id != null) return false;
+        if (name != null ? !name.equals(movie.name) : movie.name != null) return false;
+        if (year != null ? !year.equals(movie.year) : movie.year != null) return false;
+        if (director != null ? !director.equals(movie.director) : movie.director != null) return false;
+        return status != null ? status.equals(movie.status) : movie.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (year != null ? year.hashCode() : 0);
+        result = 31 * result + (director != null ? director.hashCode() : 0);
+        result = 31 * result + rating;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }
