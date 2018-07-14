@@ -30,6 +30,7 @@ DONE !
 ------------------------------------------------------------------------------------------
 
 Assignment: Biblioteca Release 1
+
 Business Case
 The Bangalore Public Library has approached us to design and implement a Library Management System for them. Based on their requirements, we have decided to develop a new system named Biblioteca. Since the library has a large list of requirements, we will be making multiple releases of Biblioteca, with each release incrementally adding more functionality.
 
@@ -62,3 +63,18 @@ Follow the instructions in the included README file to create your project on Gi
 Use TDD to write code that fulfills the requirements for Biblioteca.
 Make sure you keep committing your code changes to your GitHub repository frequently.
 You are encourged to use the internet to further your learning, as well as to solve any issues you run into. If the internet is not providing you what you need, reach out to your GEL. They are here to provide feedback and support in order to accelerate your learning.
+
+
+---------------------------------------------------------------------------------------
+
+
+Assignment: Biblioteca Release 2
+
+The Bangalore Public Library is quite happy with the first release of Biblioteca. Time for us to move on to the next release! This release of Biblioteca needs to have two major features:
+
+User Stories
+-List Movies - As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out. Movies have a name, year, director and movie rating (from 1-10 or unrated).
+-Check-out Movie - As a customer, I would like to check out a movie from the library, so I can enjoy it at home.
+-User Accounts - Login - As a librarian, I want to know who has checked out a book, so that I can hold them accountable for returning it. Users must now login using their library number (which is in the format xxx-xxxx) and a password in order to check-out and return books. User credentials are predefined, so registering new users is not part of this story.
+-User Accounts - User information - As a customer, I want to be able to see my user information (name, email address and phone number), so that I know that the library can contact me. This option should only be available when the customer is logged in and should only display that customer’s information.
+
