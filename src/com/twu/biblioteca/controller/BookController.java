@@ -5,7 +5,19 @@ package com.twu.biblioteca.controller;
  */
 public class BookController {
 
-    public void welcomeMessage() {
-        System.out.println("Welcome to Biblioteca!");
+    public static void welcomeMessage() {
+        System.out.print("----------Welcome to Biblioteca!----------\n\n");
+    }
+
+    public static void mainMenu() {
+        System.out.print(
+                "1. List Books\n" +
+                "------------------------------------------\n" +
+                "Please enter your choice: ");
+    }
+
+    public static void init() {
+        welcomeMessage();
+        mainMenu();
     }
 }

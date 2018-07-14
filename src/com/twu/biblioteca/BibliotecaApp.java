@@ -1,8 +1,10 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.controller.BookController;
+
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        BookController.init();
     }
 }

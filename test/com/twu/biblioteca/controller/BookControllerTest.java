@@ -31,7 +31,16 @@ public class BookControllerTest {
     @Test
     public void should_print_welcome_message_when_customer_start_the_application() {
         bookController.welcomeMessage();
-        assertThat(systemOut(),containsString("Welcome to Biblioteca!"));
+        assertThat(systemOut(), containsString("----------Welcome to Biblioteca!----------\n\n"));
     }
 
+    @Test
+    public void should_print_main_menu_after_welcome_message() {
+        bookController.init();
+        assertThat(systemOut(), containsString(
+                "----------Welcome to Biblioteca!----------\n\n" +
+                        "1. List Books\n" +
+                        "------------------------------------------\n" +
+                        "Please enter your choice: "));
+    }
 }
