@@ -16,12 +16,12 @@ public class Book {
 
     public Book() {}
 
-    public Book(String id, String name, String author, String yearOfPublication) {
+    public Book(String id, String name, String author, String yearOfPublication, String status) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.yearOfPublication = yearOfPublication;
-        this.status = "1";
+        this.status = status;
     }
 
     public String getId() {

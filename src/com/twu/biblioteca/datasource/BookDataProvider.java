@@ -11,17 +11,20 @@ import java.util.List;
 public class BookDataProvider {
 
     private List<Book> books = Arrays.asList(
-            new Book("twu001", "Head First Java", "Kathy Sierra,BertBates", "2005"),
-            new Book("twu002", "Pride and Prejudice", "Jane Austen", "1983"),
-            new Book("twu003", "The Little Prince", "Antoine de Saint-Exupery", "1998"),
-            new Book("twu004", "Harry Potter and the Prisoner of Azkaban", "J. K. Rowling", "2001"),
-            new Book("twu005", "Les Miserables", "Victor Hugo", "1862")
+            new Book("twu001", "Head First Java", "Kathy Sierra,BertBates", "2005", "1"),
+            new Book("twu002", "Pride and Prejudice", "Jane Austen", "1983", "1"),
+            new Book("twu003", "The Little Prince", "Antoine de Saint-Exupery", "1998", "1"),
+            new Book("twu004", "Harry Potter and the Prisoner of Azkaban", "J. K. Rowling", "2001", "1"),
+            new Book("twu005", "Les Miserables", "Victor Hugo", "1862", "1")
     );
 
     public List<Book> getBooks() {
         return books;
     }
 
+    public void setBooks(List books) {
+        this.books = books;
+    }
 
     public void printBookList() {
         System.out.print("----------Here is the Book List----------\n");
@@ -39,5 +42,14 @@ public class BookDataProvider {
             System.out.printf("%-40s", book.getAuthor());
             System.out.printf("%-5s\n", book.getYearOfPublication());
         }
+    }
+
+    public Book getBook(String id) {
+        for (Book book : books) {
+            if (book.getId().equals(id)) {
+                return book;
+            }
+        }
+        return null;
     }
 }
