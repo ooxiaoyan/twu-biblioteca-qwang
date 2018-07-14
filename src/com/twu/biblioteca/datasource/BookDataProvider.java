@@ -31,6 +31,9 @@ public class BookDataProvider {
         System.out.printf("%-5s\n", "YearOfPublication");
 
         for (Book book : getBooks()) {
+            if ("0".equals(book.getStatus())) {
+                continue;
+            }
             System.out.printf("%-10s", book.getId());
             System.out.printf("%-60s", book.getName());
             System.out.printf("%-40s", book.getAuthor());
