@@ -21,6 +21,10 @@ public class MovieDataProvider {
         return movies;
     }
 
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     public void printMovieList() {
         System.out.print("----------Here is the Movie List----------\n");
         System.out.printf("%-10s", "Id");
@@ -40,5 +44,15 @@ public class MovieDataProvider {
             System.out.printf("%-5d\n", movie.getRating());
         }
         System.out.print("-----------------------------------------\n");
+    }
+
+    public Movie getMovie(String movieId) {
+        for (Movie movie : movies) {
+            if (movie.getId().equals(movieId)) {
+                return movie;
+            }
+        }
+        return null;
+
     }
 }

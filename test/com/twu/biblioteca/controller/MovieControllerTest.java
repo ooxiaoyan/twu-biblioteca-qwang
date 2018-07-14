@@ -1,5 +1,6 @@
 package com.twu.biblioteca.controller;
 
+import com.twu.biblioteca.datasource.MovieDataProvider;
 import com.twu.biblioteca.entity.Movie;
 import org.junit.Before;
 import org.junit.Test;
@@ -75,19 +76,19 @@ public class MovieControllerTest {
         List<Movie> movies = checkoutMovies();
         movieDataProvider.setMovies(movies);
 
-        movieController.checkoutMovie("mov001");
+        movieController.checkoutMovie("mov002");
         assertThat(movieDataProvider.getMovies(), is(movieController.movieDataProvider.getMovies()));
     }
 
     @Test
     public void should_print_successful_message_after_successful_checkout_movie() {
-        movieController.checkoutMovie("mov001");
+        movieController.checkoutMovie("mov002");
         assertThat(systemOut(), containsString("Thank you! Enjoy the movie."));
     }
 
     @Test
-    public void should_print_unsuccessful_message_after_unsuccessful_checkout_bmovie() {
-        movieController.checkoutMovie("mov001");
+    public void should_print_unsuccessful_message_after_unsuccessful_checkout_movie() {
+        movieController.checkoutMovie("mov010");
         assertThat(systemOut(), containsString("That movie is not available."));
     }
 }
