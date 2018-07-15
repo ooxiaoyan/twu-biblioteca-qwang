@@ -118,9 +118,9 @@ public class MainController {
                 System.out.printf("%-50s", checkout.getName());
                 System.out.printf("%-20s", checkout.getType());
                 System.out.printf("%-20s\n", checkout.getTime());
-
-                System.out.print("-----------------------------------------\n");
             }
+
+            System.out.print("-----------------------------------------\n");
         }
     }
 
