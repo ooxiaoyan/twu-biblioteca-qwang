@@ -12,21 +12,23 @@ public class BookController {
 
     BookDataProvider bookDataProvider = new BookDataProvider();
 
-    public void checkoutBookMenu() {
+    public Book checkoutBookMenu() {
         System.out.print("\nPlease enter the book id which you want to checkout: ");
         Scanner input = new Scanner(System.in);
         String bookId = input.next();
-        checkoutBook(bookId);
+        return checkoutBook(bookId);
     }
 
-    public void checkoutBook(String bookId) {
+    public Book checkoutBook(String bookId) {
         Book book = bookDataProvider.getBook(bookId);
         if (book != null && book.getStatus().equals("1")) {
             int index = bookDataProvider.getBooks().indexOf(book);
             bookDataProvider.getBooks().get(index).setStatus("0");
             successfulCheckout();
+            return book;
         } else {
             unsuccessfulCheckout();
+            return null;
         }
     }
 
