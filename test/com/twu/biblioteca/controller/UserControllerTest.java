@@ -18,11 +18,13 @@ import static org.junit.Assert.assertTrue;
 public class UserControllerTest {
 
     private UserController userController;
+    private MainController mainController;
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
     public void setup() {
         userController = new UserController();
+        mainController = new MainController();
         System.setOut(new PrintStream(outContent));
     }
 
@@ -52,8 +54,6 @@ public class UserControllerTest {
 
     @Test
     public void should_print_checkout_book_information_when_user_have_already_checked_out() {
-        MainController mainController = new MainController();
-
         String data = "twu001";
         InputStream stdin = System.in;
         try {
@@ -64,16 +64,12 @@ public class UserControllerTest {
         }
 
         mainController.printCheckoutInfo();
-
         String result = "twu001    Head First Java";
-
         assertThat(systemOut(), containsString(result));
     }
 
     @Test
     public void should_print_checkout_movie_information_when_user_have_already_checked_out() {
-        MainController mainController = new MainController();
-
         String data = "mov001";
         InputStream stdin = System.in;
         try {
@@ -84,9 +80,43 @@ public class UserControllerTest {
         }
 
         mainController.printCheckoutInfo();
-
         String result = "mov001    The Shawshank Redemption";
+        assertThat(systemOut(), containsString(result));
+    }
 
+    @Test
+    public void should_not_appear_returned_book_when_print_Checkout_Information() {
+        mainController.getBookController().bookDataProvider.getBooks().get(0).setStatus("0");
+
+        String data = "twu001";
+        InputStream stdin = System.in;
+        try {
+            System.setIn(new ByteArrayInputStream(data.getBytes()));
+            mainController.getBookController().returnBookMenu(mainController.getCheckoutList());
+        } finally {
+            System.setIn(stdin);
+        }
+
+        mainController.printCheckoutInfo();
+        String result = "No checkout Book or Movie Data!";
+        assertThat(systemOut(), containsString(result));
+    }
+
+    @Test
+    public void should_not_appear_returned_movie_when_print_Checkout_Information() {
+        mainController.getMovieController().movieDataProvider.getMovies().get(0).setStatus("0");
+
+        String data = "mov001";
+        InputStream stdin = System.in;
+        try {
+            System.setIn(new ByteArrayInputStream(data.getBytes()));
+            mainController.getMovieController().returnMovieMenu(mainController.getCheckoutList());
+        } finally {
+            System.setIn(stdin);
+        }
+
+        mainController.printCheckoutInfo();
+        String result = "No checkout Book or Movie Data!";
         assertThat(systemOut(), containsString(result));
     }
 }
