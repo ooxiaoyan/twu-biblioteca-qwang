@@ -78,8 +78,7 @@ public class Movie {
         if (id != null ? !id.equals(movie.id) : movie.id != null) return false;
         if (name != null ? !name.equals(movie.name) : movie.name != null) return false;
         if (year != null ? !year.equals(movie.year) : movie.year != null) return false;
-        if (director != null ? !director.equals(movie.director) : movie.director != null) return false;
-        return status != null ? status.equals(movie.status) : movie.status == null;
+        return director != null ? director.equals(movie.director) : movie.director == null;
     }
 
     @Override
@@ -89,7 +88,6 @@ public class Movie {
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (director != null ? director.hashCode() : 0);
         result = 31 * result + rating;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }
