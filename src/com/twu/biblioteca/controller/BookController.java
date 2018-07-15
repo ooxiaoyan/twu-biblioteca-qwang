@@ -53,7 +53,8 @@ public class BookController {
         String bookId = input.next();
         Book book = returnBook(bookId);
         if (book != null) {
-            checkoutList.remove(book);
+            int index = bookDataProvider.getBooks().indexOf(book);
+            checkoutList.remove(index);
         }
     }
 

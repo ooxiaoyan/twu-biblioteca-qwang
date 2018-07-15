@@ -53,7 +53,8 @@ public class MovieController {
         String movieId = input.next();
         Movie movie = returnMovie(movieId);
         if (movie != null) {
-            checkoutList.remove(movie);
+            int index = movieDataProvider.getMovies().indexOf(movie);
+            checkoutList.remove(index);
         }
     }
 

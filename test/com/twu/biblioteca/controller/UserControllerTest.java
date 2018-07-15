@@ -1,5 +1,6 @@
 package com.twu.biblioteca.controller;
 
+import com.twu.biblioteca.entity.Checkout;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,7 +88,8 @@ public class UserControllerTest {
     @Test
     public void should_not_appear_returned_book_when_print_Checkout_Information() {
         mainController.getBookController().bookDataProvider.getBooks().get(0).setStatus("0");
-
+        Checkout checkoutObject = new Checkout("twu001", "Head First Java", "Book", MainController.getTime());
+        mainController.getCheckoutList().add(checkoutObject);
         String data = "twu001";
         InputStream stdin = System.in;
         try {
@@ -105,6 +107,8 @@ public class UserControllerTest {
     @Test
     public void should_not_appear_returned_movie_when_print_Checkout_Information() {
         mainController.getMovieController().movieDataProvider.getMovies().get(0).setStatus("0");
+        Checkout checkoutObject = new Checkout("mov001", "The Shawshank Redemption", "Movie", MainController.getTime());
+        mainController.getCheckoutList().add(checkoutObject);
 
         String data = "mov001";
         InputStream stdin = System.in;
