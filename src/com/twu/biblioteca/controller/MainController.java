@@ -1,16 +1,20 @@
 package com.twu.biblioteca.controller;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Checkout;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by 筱湮 on 2018/7/15 0015.
  */
 public class MainController {
 
-    BookController bookController = new BookController();
-    MovieController movieController = new MovieController();
-    UserController userController = new UserController();
+    private BookController bookController = new BookController();
+    private MovieController movieController = new MovieController();
+    private UserController userController = new UserController();
+    private List<Checkout> checkoutList = new ArrayList<Checkout>();
 
     public void welcomeMessage() {
         System.out.print("----------Welcome to Biblioteca!----------\n");
@@ -25,6 +29,7 @@ public class MainController {
                 "5. Checkout Movie\n" +
                 "6. Return Movie\n" +
                 "7. User Information\n" +
+                "8. Checkout Information\n" +
                 "0. Quit\n" +
                 "------------------------------------------\n" +
                 "Please enter your choice: ");
@@ -65,7 +70,11 @@ public class MainController {
             bookController.bookDataProvider.printBookList();
             mainMenuPanel();
         } else if (num == 2) {
-            bookController.checkoutBookMenu();
+            Book book = bookController.checkoutBookMenu();
+            if (book != null) {
+                Checkout checkoutObject = new Checkout(book.getId(), book.getName(), book.getClass().getSimpleName(), getTime());
+                checkoutList.add(checkoutObject);
+            }
             mainMenuPanel();
         } else if (num == 3) {
             bookController.returnBookMenu();
@@ -76,11 +85,40 @@ public class MainController {
         }else if (num == 7) {
             userController.printUserInfo();
             mainMenuPanel();
+        }else if (num == 8) {
+            printCheckoutInfo();
+            mainMenuPanel();
         } else if (num == 0) {
             quit();
         } else {
             invalidOptionMessage();
             mainMenuOption();
+        }
+    }
+
+    public String getTime() {
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return df.format(date);
+    }
+
+    public void printCheckoutInfo() {
+        if (checkoutList.size() == 0) {
+            System.out.println("\n No checkout Book or Movie.\n");
+        }
+        for (Checkout checkout : checkoutList) {
+            System.out.print("\n---------- Checkout Information ----------\n");
+            System.out.printf("%-10s", "Id");
+            System.out.printf("%-50s", "Name");
+            System.out.printf("%-20s", "Type");
+            System.out.printf("%-20s\n", "Time");
+
+            System.out.printf("%-10s", checkout.getId());
+            System.out.printf("%-50s", checkout.getName());
+            System.out.printf("%-20s", checkout.getType());
+            System.out.printf("%-20s\n", checkout.getTime());
+
+            System.out.print("-----------------------------------------\n");
         }
     }
 
