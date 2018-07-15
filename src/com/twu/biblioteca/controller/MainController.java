@@ -53,7 +53,7 @@ public class MainController {
             num = -1;
         }
 
-        if (num == 2 || num == 3 || num == 5 || num == 7 || num == 8) {
+        if (num == 2 || num == 3 || num == 5 || num == 6 || num == 7 || num == 8) {
             if (!userController.isLogin()) {
                 boolean login = userController.loginMenu();
                 if (!login) {
