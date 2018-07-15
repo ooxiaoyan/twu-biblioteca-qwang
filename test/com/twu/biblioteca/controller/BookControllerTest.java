@@ -38,7 +38,7 @@ public class BookControllerTest {
     @Test
     public void should_print_welcome_message_when_customer_start_the_application() {
         mainController.welcomeMessage();
-        assertThat(systemOut(), containsString("----------Welcome to Biblioteca!----------\n\n"));
+        assertThat(systemOut(), containsString("----------Welcome to Biblioteca!----------"));
     }
 
     @Test
