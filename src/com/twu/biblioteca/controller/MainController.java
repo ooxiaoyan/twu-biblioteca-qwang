@@ -2,6 +2,7 @@ package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.Checkout;
+import com.twu.biblioteca.entity.Movie;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -82,10 +83,17 @@ public class MainController {
         } else if (num == 4) {
             movieController.movieDataProvider.printMovieList();
             mainMenuPanel();
-        }else if (num == 7) {
+        } else if (num == 5) {
+            Movie movie = movieController.checkoutMovieMenu();
+            if (movie != null) {
+                Checkout checkoutObject = new Checkout(movie.getId(), movie.getName(), movie.getClass().getSimpleName(), getTime());
+                checkoutList.add(checkoutObject);
+            }
+            mainMenuPanel();
+        } else if (num == 7) {
             userController.printUserInfo();
             mainMenuPanel();
-        }else if (num == 8) {
+        } else if (num == 8) {
             printCheckoutInfo();
             mainMenuPanel();
         } else if (num == 0) {
