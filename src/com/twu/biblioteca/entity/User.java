@@ -15,7 +15,6 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private boolean loginStatus;
 
     private List checkoutList = new ArrayList();
 
@@ -28,7 +27,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.loginStatus = false;
     }
 
     public String getNumber() {
@@ -49,14 +47,6 @@ public class User {
 
     public String getPhone() {
         return phone;
-    }
-
-    public boolean isLoginStatus() {
-        return loginStatus;
-    }
-
-    public void setLoginStatus(boolean loginStatus) {
-        this.loginStatus = loginStatus;
     }
 
     @Override
