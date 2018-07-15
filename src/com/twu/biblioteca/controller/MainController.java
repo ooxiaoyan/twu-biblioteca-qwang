@@ -10,9 +10,10 @@ public class MainController {
 
     BookController bookController = new BookController();
     MovieController movieController = new MovieController();
+    UserController userController = new UserController();
 
     public void welcomeMessage() {
-        System.out.print("----------Welcome to Biblioteca!----------\n\n");
+        System.out.print("----------Welcome to Biblioteca!----------\n");
     }
 
     public void mainMenu() {
@@ -23,6 +24,7 @@ public class MainController {
                 "4. List Movies\n" +
                 "5. Checkout Movie\n" +
                 "6. Return Movie\n" +
+                "7. User Information\n" +
                 "0. Quit\n" +
                 "------------------------------------------\n" +
                 "Please enter your choice: ");
@@ -47,6 +49,18 @@ public class MainController {
             num = -1;
         }
 
+        if (num == 2 || num == 3 || num == 5 || num == 7) {
+            if (!userController.isLogin()) {
+                boolean login = userController.loginMenu();
+                if (!login) {
+                    userController.unsuccessfulLogin();
+                    mainMenuPanel();
+                } else {
+                    userController.successfulLogin();
+                }
+            }
+        }
+
         if (num == 1) {
             bookController.bookDataProvider.printBookList();
             mainMenuPanel();
@@ -58,6 +72,9 @@ public class MainController {
             mainMenuPanel();
         } else if (num == 4) {
             movieController.movieDataProvider.printMovieList();
+            mainMenuPanel();
+        }else if (num == 7) {
+            userController.printUserInfo();
             mainMenuPanel();
         } else if (num == 0) {
             quit();
