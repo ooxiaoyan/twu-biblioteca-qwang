@@ -108,13 +108,12 @@ public class MainController {
             System.out.println("\n No checkout Book or Movie Data!\n");
         } else {
             System.out.print("\n---------- Checkout Information ----------\n");
+            System.out.printf("%-10s", "Id");
+            System.out.printf("%-50s", "Name");
+            System.out.printf("%-20s", "Type");
+            System.out.printf("%-20s\n", "Time");
 
             for (Checkout checkout : checkoutList) {
-                System.out.printf("%-10s", "Id");
-                System.out.printf("%-50s", "Name");
-                System.out.printf("%-20s", "Type");
-                System.out.printf("%-20s\n", "Time");
-
                 System.out.printf("%-10s", checkout.getId());
                 System.out.printf("%-50s", checkout.getName());
                 System.out.printf("%-20s", checkout.getType());
