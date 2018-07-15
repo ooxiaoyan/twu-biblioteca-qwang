@@ -1,8 +1,10 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.datasource.MovieDataProvider;
+import com.twu.biblioteca.entity.Checkout;
 import com.twu.biblioteca.entity.Movie;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,11 +14,16 @@ public class MovieController {
 
     MovieDataProvider movieDataProvider = new MovieDataProvider();
 
-    public Movie checkoutMovieMenu() {
+    public void checkoutMovieMenu(List<Checkout> checkoutList) {
         System.out.print("\nPlease enter the movie id which you want to checkout: ");
         Scanner input = new Scanner(System.in);
         String movieId = input.next();
-        return checkoutMovie(movieId);
+
+        Movie movie = checkoutMovie(movieId);
+        if (movie != null) {
+            Checkout checkoutObject = new Checkout(movie.getId(), movie.getName(), movie.getClass().getSimpleName(), MainController.getTime());
+            checkoutList.add(checkoutObject);
+        }
     }
 
     public Movie checkoutMovie(String movieId) {

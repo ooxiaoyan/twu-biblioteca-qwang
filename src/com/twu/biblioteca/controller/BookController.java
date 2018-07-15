@@ -2,7 +2,9 @@ package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.datasource.BookDataProvider;
 import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Checkout;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,11 +14,16 @@ public class BookController {
 
     BookDataProvider bookDataProvider = new BookDataProvider();
 
-    public Book checkoutBookMenu() {
+    public void checkoutBookMenu(List<Checkout> checkoutList) {
         System.out.print("\nPlease enter the book id which you want to checkout: ");
         Scanner input = new Scanner(System.in);
         String bookId = input.next();
-        return checkoutBook(bookId);
+
+        Book book = checkoutBook(bookId);
+        if (book != null) {
+            Checkout checkoutObject = new Checkout(book.getId(), book.getName(), book.getClass().getSimpleName(), MainController.getTime());
+            checkoutList.add(checkoutObject);
+        }
     }
 
     public Book checkoutBook(String bookId) {

@@ -3,7 +3,9 @@ package com.twu.biblioteca.controller;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -46,5 +48,45 @@ public class UserControllerTest {
         userController.printUserInfo();
 
         assertThat(systemOut(), containsString(userInfo));
+    }
+
+    @Test
+    public void should_print_checkout_book_information_when_user_have_already_checked_out() {
+        MainController mainController = new MainController();
+
+        String data = "twu001";
+        InputStream stdin = System.in;
+        try {
+            System.setIn(new ByteArrayInputStream(data.getBytes()));
+            mainController.getBookController().checkoutBookMenu(mainController.getCheckoutList());
+        } finally {
+            System.setIn(stdin);
+        }
+
+        mainController.printCheckoutInfo();
+
+        String result = "twu001    Head First Java";
+
+        assertThat(systemOut(), containsString(result));
+    }
+
+    @Test
+    public void should_print_checkout_movie_information_when_user_have_already_checked_out() {
+        MainController mainController = new MainController();
+
+        String data = "mov001";
+        InputStream stdin = System.in;
+        try {
+            System.setIn(new ByteArrayInputStream(data.getBytes()));
+            mainController.getMovieController().checkoutMovieMenu(mainController.getCheckoutList());
+        } finally {
+            System.setIn(stdin);
+        }
+
+        mainController.printCheckoutInfo();
+
+        String result = "mov001    The Shawshank Redemption";
+
+        assertThat(systemOut(), containsString(result));
     }
 }

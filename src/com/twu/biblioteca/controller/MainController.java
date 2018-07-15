@@ -1,8 +1,6 @@
 package com.twu.biblioteca.controller;
 
-import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.Checkout;
-import com.twu.biblioteca.entity.Movie;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -55,7 +53,7 @@ public class MainController {
             num = -1;
         }
 
-        if (num == 2 || num == 3 || num == 5 || num == 7) {
+        if (num == 2 || num == 3 || num == 5 || num == 7 || num == 8) {
             if (!userController.isLogin()) {
                 boolean login = userController.loginMenu();
                 if (!login) {
@@ -71,11 +69,7 @@ public class MainController {
             bookController.bookDataProvider.printBookList();
             mainMenuPanel();
         } else if (num == 2) {
-            Book book = bookController.checkoutBookMenu();
-            if (book != null) {
-                Checkout checkoutObject = new Checkout(book.getId(), book.getName(), book.getClass().getSimpleName(), getTime());
-                checkoutList.add(checkoutObject);
-            }
+            bookController.checkoutBookMenu(checkoutList);
             mainMenuPanel();
         } else if (num == 3) {
             bookController.returnBookMenu();
@@ -84,11 +78,7 @@ public class MainController {
             movieController.movieDataProvider.printMovieList();
             mainMenuPanel();
         } else if (num == 5) {
-            Movie movie = movieController.checkoutMovieMenu();
-            if (movie != null) {
-                Checkout checkoutObject = new Checkout(movie.getId(), movie.getName(), movie.getClass().getSimpleName(), getTime());
-                checkoutList.add(checkoutObject);
-            }
+            movieController.checkoutMovieMenu(checkoutList);
             mainMenuPanel();
         } else if (num == 7) {
             userController.printUserInfo();
@@ -104,7 +94,7 @@ public class MainController {
         }
     }
 
-    public String getTime() {
+    public static String getTime() {
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(date);
@@ -112,7 +102,7 @@ public class MainController {
 
     public void printCheckoutInfo() {
         if (checkoutList.size() == 0) {
-            System.out.println("\n No checkout Book or Movie.\n");
+            System.out.println("\n No checkout Book or Movie Data!\n");
         }
         for (Checkout checkout : checkoutList) {
             System.out.print("\n---------- Checkout Information ----------\n");
@@ -136,5 +126,21 @@ public class MainController {
 
     public void invalidOptionMessage() {
         System.out.print("Select a valid option! Please enter again your choice: ");
+    }
+
+    public BookController getBookController() {
+        return bookController;
+    }
+
+    public MovieController getMovieController() {
+        return movieController;
+    }
+
+    public UserController getUserController() {
+        return userController;
+    }
+
+    public List<Checkout> getCheckoutList() {
+        return checkoutList;
     }
 }
