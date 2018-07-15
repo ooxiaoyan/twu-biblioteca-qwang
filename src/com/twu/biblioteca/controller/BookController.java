@@ -47,21 +47,26 @@ public class BookController {
         System.out.println("\nThat book is not available.");
     }
 
-    public void returnBookMenu() {
+    public void returnBookMenu(List<Checkout> checkoutList) {
         System.out.print("\nPlease enter the book id which you want to return: ");
         Scanner input = new Scanner(System.in);
         String bookId = input.next();
-        returnBook(bookId);
+        Book book = returnBook(bookId);
+        if (book != null) {
+            checkoutList.remove(book);
+        }
     }
 
-    public void returnBook(String bookId) {
+    public Book returnBook(String bookId) {
         Book book = bookDataProvider.getBook(bookId);
         if (book != null && book.getStatus().equals("0")) {
             int index = bookDataProvider.getBooks().indexOf(book);
             bookDataProvider.getBooks().get(index).setStatus("1");
             successfulReturn();
+            return bookDataProvider.getBooks().get(index);
         } else {
             unsuccessfulReturn();
+            return null;
         }
     }
 

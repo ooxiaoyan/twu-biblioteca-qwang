@@ -72,13 +72,16 @@ public class MainController {
             bookController.checkoutBookMenu(checkoutList);
             mainMenuPanel();
         } else if (num == 3) {
-            bookController.returnBookMenu();
+            bookController.returnBookMenu(checkoutList);
             mainMenuPanel();
         } else if (num == 4) {
             movieController.movieDataProvider.printMovieList();
             mainMenuPanel();
         } else if (num == 5) {
             movieController.checkoutMovieMenu(checkoutList);
+            mainMenuPanel();
+        } else if (num == 6) {
+            movieController.returnMovieMenu(checkoutList);
             mainMenuPanel();
         } else if (num == 7) {
             userController.printUserInfo();
@@ -103,20 +106,22 @@ public class MainController {
     public void printCheckoutInfo() {
         if (checkoutList.size() == 0) {
             System.out.println("\n No checkout Book or Movie Data!\n");
-        }
-        for (Checkout checkout : checkoutList) {
+        } else {
             System.out.print("\n---------- Checkout Information ----------\n");
-            System.out.printf("%-10s", "Id");
-            System.out.printf("%-50s", "Name");
-            System.out.printf("%-20s", "Type");
-            System.out.printf("%-20s\n", "Time");
 
-            System.out.printf("%-10s", checkout.getId());
-            System.out.printf("%-50s", checkout.getName());
-            System.out.printf("%-20s", checkout.getType());
-            System.out.printf("%-20s\n", checkout.getTime());
+            for (Checkout checkout : checkoutList) {
+                System.out.printf("%-10s", "Id");
+                System.out.printf("%-50s", "Name");
+                System.out.printf("%-20s", "Type");
+                System.out.printf("%-20s\n", "Time");
 
-            System.out.print("-----------------------------------------\n");
+                System.out.printf("%-10s", checkout.getId());
+                System.out.printf("%-50s", checkout.getName());
+                System.out.printf("%-20s", checkout.getType());
+                System.out.printf("%-20s\n", checkout.getTime());
+
+                System.out.print("-----------------------------------------\n");
+            }
         }
     }
 
@@ -134,10 +139,6 @@ public class MainController {
 
     public MovieController getMovieController() {
         return movieController;
-    }
-
-    public UserController getUserController() {
-        return userController;
     }
 
     public List<Checkout> getCheckoutList() {
